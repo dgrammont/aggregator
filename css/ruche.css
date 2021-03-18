@@ -1,0 +1,372 @@
+/*  feuille de style  du site Aggregator     	
+     Auteur Philippe SIMIER                     
+     Version 2.0 Mai 2020
+*/	 
+
+/* Definition du corps de la page              */
+body {
+    background-image: url(fond.svg);
+    background-repeat: repeat-x;
+    background-repeat-x: repeat;
+    background-repeat-y: no-repeat;
+    background-position: 0 100%;
+    background-position-x: 0px;
+    background-position-y: 100%;
+    -webkit-background-size: auto 230px;
+    background-size: auto 230px;
+    background-attachment: fixed;
+}
+
+.popin {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px #999;
+    padding: 10px;
+    margin-top: 10px; 
+
+}
+
+/* Couleurs et type de ligne pour highcharts */
+
+.highcharts-axis.highcharts-color-0 .highcharts-axis-line {
+	stroke: #7cb5ec;
+}
+
+.highcharts-axis.highcharts-color-0 text {
+	fill: #7cb5ec;
+}
+
+.highcharts-yaxis .highcharts-axis-line {
+	stroke-width: 1px;
+}
+
+#customPopup 
+{
+    position: fixed;
+    display: none;
+    left: 50%;
+    top: 50%;
+    z-index: 2000;
+    padding: 20px;
+    width: 560px;
+    background-color: #fff;
+    color: #202020;
+    border-radius: 8px;
+    box-shadow: 0 0 20px #999;
+}
+
+#grayBack 
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 1999;
+    opacity: 0.3;
+}
+ 
+
+/* page centrée largeur 1098  fond blanc*/
+#page {
+    Background-Color: #FFF;
+    margin: 0 auto;
+    padding: 0;
+    width: 1098px;
+    border-color:#323232 #323232 #323232;
+    border-style:solid;
+    border-width:1px 1px 1px;
+    text-align: left;
+ }
+
+/* la div id contenu  */
+#contenu {
+    margin-top: 5px;
+    min-height: 400px;
+ }
+
+a {
+    color:#000;
+}
+
+.support:before {
+    content: "\f02d";
+    font-family: FontAwesome;
+    text-decoration: inherit;
+    color: #000;
+    font-size: 25px;
+    position: absolute;
+    top: -4px;
+    left: 15px;
+}
+
+.support {
+	padding-left: 30px;
+}
+
+.copyright {
+	float: right;
+}
+
+#cookieConsent {
+    background-color: rgba(20, 20, 20, 0.8);
+    min-height: 70px;
+    font-size: 14px;
+    color: #fff;
+    line-height: 26px;
+    padding: 8px 0 8px 0px;
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    text-align: center;
+}
+
+#cookieConsent a:hover {
+    color: #67bfd4;
+    text-decoration: none;
+}
+#cookieConsent a {
+    color: #8fd0df;
+    text-decoration: none;
+}
+
+/* style pour popover 
+a[data-toggle] {
+  text-decoration: none;
+}
+
+a[data-toggle]:hover {
+  cursor: help;
+}
+
+ fin du popover */	
+
+/* La règle  @font-face permet de définir les polices d'écriture 
+   à utiliser pour afficher le texte de pages web. */
+@font-face{
+	font-family:'FontAwesome';
+	src:url('../fonts/fontawesome-webfont.eot');
+	src:url('../fonts/fontawesome-webfont.eot') format('embedded-opentype'),
+	    url('../fonts/fontawesome-webfont.woff2') format('woff2'),
+		url('../fonts/fontawesome-webfont.woff') format('woff'),
+		url('../fonts/fontawesome-webfont.ttf') format('truetype'),
+		url('../fonts/fontawesome-webfont.svg#fontawesomeregular') format('svg');
+	font-weight:normal;
+	font-style:normal
+}
+
+.file-list, .file-list ul{
+    list-style-type: none;
+    font-size:1em;
+    line-height:1.8em;
+    margin-left:10px;
+    padding-left:14px;
+    border-left:1px dotted #aaa;
+}
+.file-list li{
+    position: relative;
+    padding-left:25px;
+}
+.file-list li a{
+    text-decoration: none;
+    color:#444;  
+}
+.file-list li a:before{
+    display:block;
+    content: " ";
+    width:10px;
+    height:1px;
+    position:absolute;
+    border-bottom:1px dotted #aaa;
+    top:.6em;
+    left:-14px;
+}
+
+/* Lien data */
+.file-list li:before{
+    list-style-type: none;
+    font-family: FontAwesome;
+    display:block;
+    content:'\f1fe';
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:20px;
+    height:20px;
+    font-size:1.3em;
+    color:#555;
+}
+/* Lien Analysis */
+.file-list li.analysis:before{
+    list-style-type: none;
+    font-family: FontAwesome;
+    display:block;
+    content:'\f080';
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:20px;
+    height:20px;
+    font-size:1.3em;
+    color:#555;
+}
+
+
+.file-list .folder-root{
+    list-style-type: none;
+}
+.file-list .folder-root a{
+    text-decoration:none;
+}
+
+/* répertoire ruche */
+.file-list .ruche:before{
+    color:#FFD04E;
+    content: "\f187";
+}
+/* Répertoire ruche ouverte */
+.file-list .ruche.open:before{
+    content: "\f187";
+}
+
+/* répertoire weather */
+.file-list .weather:before{
+    color:#FFD04E;
+    content: "\f185";
+}
+/* Répertoire weather ouverte */
+.file-list .weather.open:before{
+    content: "\f185";
+}
+
+/* répertoire objet */
+.file-list .objet:before{
+    color:#FFD04E;
+    content: "\f1b2";
+}
+/* Répertoire objet ouvert */
+.file-list .objet.open:before{
+    content: "\f1b2";
+}
+
+
+li.folder-root ul{
+    transition: all .3s ease-in-out;
+    overflow:hidden;
+}
+li.folder-root.closed>ul{
+   opacity:0;
+   max-height:0px;
+}
+li.folder-root.open>ul{
+   opacity:1;
+   display:block;
+   max-height:1000px;
+}
+/*
+code des icones:
+http://partelya.com/wp-content/themes/thegem/fonts/icons-list-fontawesome.html
+
+*/
+.file-list li.urllink a{
+    text-decoration:none;
+}
+.file-list li.urllink a:before{
+    display:block;
+    content: " ";
+    width:10px;
+    height:1px;
+    position:absolute;
+    border-bottom:1px dotted #aaa;
+    top:.6em;
+    left:-14px;
+}
+.file-list li.urllink:before{
+     list-style-type: none;
+    font-family: FontAwesome;
+    display:block;
+    content:'\f045';
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:20px;
+    height:20px;
+    font-size:1.3em;
+    color:#555;
+}
+
+.file-list .folder-data{
+    list-style-type: none;
+}
+.file-list .folder-data a{
+    text-decoration:none;
+}
+
+/* répertoire data */
+.file-list .folder-data:before{
+    color:#FFD04E;
+    content: "\f1fe";
+}
+/* Répertoire data */
+.file-list .folder-data.open:before{
+    content: "\f1fe";
+}
+li.folder-data ul{
+    transition: all .3s ease-in-out;
+    overflow:hidden;
+}
+li.folder-data.closed>ul{
+   opacity:0;
+   max-height:0px;
+}
+li.folder-data.open>ul{
+   opacity:1;
+   display:block;
+   max-height:1000px;
+}
+
+
+.file-list .folder-matlab{
+    list-style-type: none;
+}
+.file-list .folder-matlab a{
+    text-decoration:none;
+}
+
+/* répertoire matlab */
+.file-list .folder-matlab:before{
+    color:#FFD04E;
+    content: "\f080";
+}
+/* Répertoire matlab */
+.file-list .folder-matlab.open:before{
+    content: "\f080";
+}
+li.folder-matlab ul{
+    transition: all .3s ease-in-out;
+    overflow:hidden;
+}
+li.folder-matlab.closed>ul{
+   opacity:0;
+   max-height:0px;
+}
+li.folder-matlab.open>ul{
+   opacity:1;
+   display:block;
+   max-height:1000px;
+}
+	
+	
+	
+	
+
+
+
+
+
+
+
