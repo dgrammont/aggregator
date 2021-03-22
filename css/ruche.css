@@ -68,7 +68,7 @@ body {
 }
  
 
-/* page centrée largeur 1098  fond blanc*/
+/* page centrï¿½e largeur 1098  fond blanc*/
 #page {
     Background-Color: #FFF;
     margin: 0 auto;
@@ -145,8 +145,8 @@ a[data-toggle]:hover {
 
  fin du popover */	
 
-/* La règle  @font-face permet de définir les polices d'écriture 
-   à utiliser pour afficher le texte de pages web. */
+/* La rï¿½gle  @font-face permet de dï¿½finir les polices d'ï¿½criture 
+   ï¿½ utiliser pour afficher le texte de pages web. */
 @font-face{
 	font-family:'FontAwesome';
 	src:url('../fonts/fontawesome-webfont.eot');
@@ -215,6 +215,36 @@ a[data-toggle]:hover {
     color:#555;
 }
 
+/* Lien Sounds */
+li.folder-sounds:before{
+    list-style-type: none;
+    font-family: FontAwesome;
+    display:block;
+    content:'\f1c7';
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:20px;
+    height:20px;
+    font-size:1.3em;
+    color:#555;
+}
+
+/* Lien com */
+.file-list li.com:before{
+    list-style-type: none;
+    font-family: FontAwesome;
+    display:block;
+    content:'\f1ea';
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:20px;
+    height:20px;
+    font-size:1.3em;
+    color:#FFD04E;
+}
+
 
 .file-list .folder-root{
     list-style-type: none;
@@ -223,32 +253,32 @@ a[data-toggle]:hover {
     text-decoration:none;
 }
 
-/* répertoire ruche */
+/* rï¿½pertoire ruche */
 .file-list .ruche:before{
     color:#FFD04E;
     content: "\f187";
 }
-/* Répertoire ruche ouverte */
+/* Rï¿½pertoire ruche ouverte */
 .file-list .ruche.open:before{
     content: "\f187";
 }
 
-/* répertoire weather */
+/* rï¿½pertoire weather */
 .file-list .weather:before{
     color:#FFD04E;
     content: "\f185";
 }
-/* Répertoire weather ouverte */
+/* Rï¿½pertoire weather ouverte */
 .file-list .weather.open:before{
     content: "\f185";
 }
 
-/* répertoire objet */
+/* rï¿½pertoire objet */
 .file-list .objet:before{
     color:#FFD04E;
     content: "\f1b2";
 }
-/* Répertoire objet ouvert */
+/* Rï¿½pertoire objet ouvert */
 .file-list .objet.open:before{
     content: "\f1b2";
 }
@@ -306,12 +336,12 @@ http://partelya.com/wp-content/themes/thegem/fonts/icons-list-fontawesome.html
     text-decoration:none;
 }
 
-/* répertoire data */
+/* rï¿½pertoire data */
 .file-list .folder-data:before{
     color:#FFD04E;
     content: "\f1fe";
 }
-/* Répertoire data */
+/* Rï¿½pertoire data */
 .file-list .folder-data.open:before{
     content: "\f1fe";
 }
@@ -337,12 +367,12 @@ li.folder-data.open>ul{
     text-decoration:none;
 }
 
-/* répertoire matlab */
+/* rï¿½pertoire matlab */
 .file-list .folder-matlab:before{
     color:#FFD04E;
     content: "\f080";
 }
-/* Répertoire matlab */
+/* Rï¿½pertoire matlab */
 .file-list .folder-matlab.open:before{
     content: "\f080";
 }
@@ -359,8 +389,52 @@ li.folder-matlab.open>ul{
    display:block;
    max-height:1000px;
 }
-	
-	
+
+/* rï¿½pertoire sounds */
+.file-list .folder-sounds:before{
+    color:#FFD04E;
+    content: "\f1c7";
+}
+/* Rï¿½pertoire sounds */
+.file-list .folder-sounds.open:before{
+    content: "\f1c7";
+}
+li.folder-sounds ul{
+    transition: all .3s ease-in-out;
+    overflow:hidden;
+}
+li.folder-sounds.closed>ul{
+   opacity:0;
+   max-height:0px;
+}
+li.folder-sounds.open>ul{
+   opacity:1;
+   display:block;
+   max-height:1000px;
+}
+
+/* rÃ©pertoire commentaire */
+.file-list.com:before{
+    color:#FFD04E;
+    content: "\f1ea";
+}
+/* RÃ©pertoire commentaire */
+.file-list .com.open:before{
+    content: "\f1ea";
+}
+li.com ul{
+    transition: all .3s ease-in-out;
+    overflow:hidden;
+}
+li.com.closed>ul{
+   opacity:0;
+   max-height:0px;
+}
+li.com.open>ul{
+   opacity:1;
+   display:block;
+   max-height:1000px;
+}
 	
 	
 

@@ -1,8 +1,8 @@
 <!----------------------------------------------------------------------------------
     @fichier  menu.php							    		
     @auteur   Philippe SIMIER (Touchard Washington le Mans)
-    @date     Avril 2020
-    @version  v1.3 - First release						
+    @date     Février 2021
+    @version  v1.4 - First release						
     @details  menu /Menu pour toutes les pages du site Aggregator 
 ------------------------------------------------------------------------------------>
 <?php 
@@ -66,25 +66,19 @@
 					echo "</a>\n";
 					echo "<div class='dropdown-menu'>\n";
 					if ($_SESSION['droits'] > 1){
-						echo "<a class='dropdown-item' href='{$racine}administration/users'>{$lang['Users']}</a>\n";
-						echo "<a class='dropdown-item' href='{$racine}administration/things'>{$lang['Things']}</a>\n";
-						echo "<a class='dropdown-item' href='{$racine}administration/channels'>{$lang['Channels']}</a>\n";
-						echo "<a class='dropdown-item' href='{$racine}administration/thingHTTPs'>{$lang['ThingHTTPs']}</a>\n";
-						echo "<a class='dropdown-item' href='{$racine}administration/reacts'>{$lang['Reacts']}</a>\n";
-						echo "<a class='dropdown-item' href='{$racine}administration/sms'>SMS</a>\n";
-						
+						echo "<a class='dropdown-item' href='{$racine}administration/users'>{$lang['Users']}</a>\n";			
 					}	
 					else{
-						echo "<a class='dropdown-item' href='{$racine}administration/users'>{$lang['My_Account']}</a>\n";
-						echo "<a class='dropdown-item' href='{$racine}administration/things'>{$lang['Things']}</a>\n";
-						echo "<a class='dropdown-item' href='{$racine}administration/channels'>{$lang['Channels']}</a>\n";
-						echo "<a class='dropdown-item' href='{$racine}administration/thingHTTPs'>{$lang['ThingHTTPs']}</a>\n";
-						echo "<a class='dropdown-item' href='{$racine}administration/reacts'>{$lang['Reacts']}</a>\n";
-						echo "<a class='dropdown-item' href='{$racine}administration/sms'>SMS</a>\n";
-						
+						echo "<a class='dropdown-item' href='{$racine}administration/users'>{$lang['My_Account']}</a>\n";						
 					}	
-					
-				echo "<a class='dropdown-item' href='{$racine}administration/signout' id='nav-sign-in'>{$lang['Sign_Out']}</a>\n";
+					echo "<a class='dropdown-item' href='{$racine}administration/things'>{$lang['Things']}</a>\n";
+					echo "<a class='dropdown-item' href='{$racine}administration/channels'>{$lang['Channels']}</a>\n";
+					echo "<a class='dropdown-item' href='{$racine}administration/thingHTTPs'>{$lang['ThingHTTPs']}</a>\n";
+					echo "<a class='dropdown-item' href='{$racine}administration/reacts'>{$lang['Reacts']}</a>\n";
+					echo "<a class='dropdown-item' href='{$racine}administration/timeControls'>{$lang['timeControls']}</a>\n";
+					echo "<a class='dropdown-item' href='{$racine}administration/scripts'>Scripts</a>\n";
+					echo "<a class='dropdown-item' href='{$racine}administration/sms'>SMS</a>\n";
+				    echo "<a class='dropdown-item' href='{$racine}administration/signout' id='nav-sign-in'>{$lang['Sign_Out']}</a>\n";
 					echo "</div>\n";
 					echo "</li>\n";
 				}	

@@ -19,7 +19,7 @@ $lang['close'] = "Close";
 $lang['display'] = "Display";
 $lang['refuse'] = "Refuse";
 
-/* index & Menu*/
+/* index & Menu */
 $lang['Sign_in'] = "Sign in";
 $lang['User login'] = "User login";
 $lang['Password'] = "Password";
@@ -51,9 +51,10 @@ $lang['hightchart'] = '{
         printChart: "Print chart",
         noData: "No data to display",
         loading: "Loading...",
-		viewFullscreen : "View in full screen"
+	viewFullscreen : "View in full screen"
     }
 }';
+
 $lang['graphic'] = "Graphic";
 $lang['hide_all'] = "Hide All";
 $lang['more_historical_data'] = "More Historical Data";
@@ -93,11 +94,11 @@ $lang['thing'] = "Thing";
 $lang['elevation'] = "Elevation";
 $lang['class'] = "Category";
 $lang['classes'] = array('ruche' => "beehive", 'objet' => 'thing', 'weather' => 'weather station');
-$lang['sel_status'] = array('private' => "private", 'public' =>"public" );
+$lang['sel_status'] = array('private' => "private", 'public' => "public");
 
 /* User formulaire */
-$lang['sel_language'] = array('FR' => "French", 'EN' => "English" );
-$lang['sel_rights'] = array(1 => "User", 2 =>"administrator" );
+$lang['sel_language'] = array('FR' => "French", 'EN' => "English");
+$lang['sel_rights'] = array(1 => "User", 2 => "administrator");
 
 /* things */
 $lang['things'] = "Things";
@@ -115,17 +116,17 @@ $lang['last_entry_id'] = "Nb of values";
 $lang['generate_New_API_Key'] = "Generate New API Key";
 $lang['view_last_values'] = "View last values";
 $lang['download_CSV'] = "Download CSV";
-$lang['clear_all_feed'] = "Clear all feed"; 
+$lang['clear_all_feed'] = "Clear all feed";
 
 /* Channel */
 $lang['field'] = "Field";
 $lang['status'] = "status";
-$lang['last_write_at'] = "Last write at"; 
+$lang['last_write_at'] = "Last write at";
 
 /* thingHTTPs */
 $lang['created'] = "Created";
 $lang['method'] = "Method";
-$lang['send']    = "Send";
+$lang['send'] = "Send";
 $lang['thingHTTP'] = "Thing HTTP";
 
 /* SMS */
@@ -150,33 +151,47 @@ $lang['condition'] = "Condition";
 $lang['action'] = "Action perform";
 $lang['Has_not_been_updated_for'] = "Has not been updated for";
 
+/* TimeControl */
+$lang['timeControl'] = "Time Control";
+$lang['timeControls'] = "Time Controls";
+$lang['month'] = "month";
+$lang['dayWeek'] = "day Week";
+$lang['dayMonth'] = "day month";
+$lang['hour'] = "hour";
+$lang['actionable_type'] = "actionable type";
+$lang['sel_actionable_type'] = array('' => 'Choose your action',
+    'thinghttps' => "ThingHTTP",
+    'scripts' => "Script"
+);
+
+
 /* webcam */
 $lang['download_picture'] = "Download picture";
 
 /* react formulaire */
-$lang['select_react_type'] = array('0'=>'Run action only the first time the condition is met',
-                                   '1'=>'Run action each time condition is met');
-								   
+$lang['select_react_type'] = array('0' => 'Run action only the first time the condition is met',
+    '1' => 'Run action each time condition is met');
+
 $lang['select_channel_id'] = "Choose a Channel";
 
-$lang['select_actionable_type'] = array('' => 'Choose your action', 
-                                        'thingHTTP' => "ThingHTTP",
-										'email' => "Send a email" );
-										
+$lang['select_actionable_type'] = array('' => 'Choose your action',
+    'thingHTTP' => "ThingHTTP",
+    'email' => "Send a email");
+
 $lang['select_interval'] = array('on_insertion' => "On data insertion",
-                         '10' =>"Every 10 minutes",
-                         '30' =>"Every 30 minutes",
-                         '60' =>"Every 60 minutes" );
+    '10' => "Every 10 minutes",
+    '30' => "Every 30 minutes",
+    '60' => "Every 60 minutes");
 
-$lang['select_condition'] = array(	'gt' => 'is greater than',
-                                    'gte' => 'is greater or equal to',
-                                    'lt' => 'is less than',
-                                    'lte' => 'is less than or equal',
-                                    'eq' =>  'is equal to',
-                                    'neq' => 'is not equal' );
+$lang['select_condition'] = array('gt' => 'is greater than',
+    'gte' => 'is greater or equal to',
+    'lt' => 'is less than',
+    'lte' => 'is less than or equal',
+    'eq' => 'is equal to',
+    'neq' => 'is not equal');
 
-$lang['select_react_type'] = array('0'=>'Run action only the first time the condition is met',
-                                  '1' =>'Run action each time condition is met');
+$lang['select_react_type'] = array('0' => 'Run action only the first time the condition is met',
+    '1' => 'Run action each time condition is met');
 
 //------------Aide pour les formulaires ---------------//
 $lang['react_aide'] = "<h3>React Settings</h3>
@@ -225,6 +240,28 @@ $lang['thingHTTP_aide'] = "<h3>ThingHTTP Settings</h3>
 </ul>
 ";
 
-$lang['cookieConsent'] = "We would like to use cookies to better understand your use of this website. More information about this and your rights as a user can be found in our"; 
-$lang['privacy_policy'] = "privacy policy";	
- ?>
+$lang['cookieConsent'] = "We would like to use cookies to better understand your use of this website. More information about this and your rights as a user can be found in our";
+$lang['privacy_policy'] = "privacy policy";
+
+$lang['script_aide'] = "<h3>Script Analysis</h3>
+<p>Explore data collected in a channel or scraped from a website</p>
+<ul>
+	<li>Find and remove bad data</li>
+	<li>Convert data to different units</li>
+	<li>Calculate new data</li>
+	<li>Build data models</li>
+</ul>
+<p>After analysis, you can write data to the channel or publish it to share your results.</p>";
+
+$lang['time_control_aide'] = "<h3>Options des tâches planifiées</h3>
+                        <ul>
+                            <li>Nom de la tâche planifiée : Saisissez un nom unique pour votre tâche planifiée.</li>
+                            <li>Minute : de 00 à 59 ou * pour toutes les minutes </li>
+                            <li>Heure : de 0 à 23 ou * pour toutes les heures </li>
+                            <li>Jour du mois : 1 à 31 ou * pour tous les jours du mois </li>
+                            <li>Mois : de 1 à 12 ou * pour tous les mois </li>
+                            <li>Jour de la semaine : de 0 à 6 (Dimanche = 0), tous les jours de la semaine si *</li>
+                            <li>Type d'action : Sélectionnez Requête HTTP ou script à exécuter </li>
+                            <li>Option : Sélectionnez le script à effectuer.</li>
+                        </ul>";
+?>

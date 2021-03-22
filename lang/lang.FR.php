@@ -151,6 +151,19 @@ $lang['condition'] = "Condition";
 $lang['action'] = "Action à Effectuer";
 $lang['Has_not_been_updated_for'] = "N'a pas été mis à jour depuis";
 
+/* TimeControl */
+$lang['timeControl'] = "Tâche planifiée";
+$lang['timeControls'] = "Tâches planifiées";
+$lang['month'] = "mois";
+$lang['dayWeek'] = "jour semaine";
+$lang['dayMonth'] = "jour mois";
+$lang['hour'] = "heure";
+$lang['actionable_type'] = "type d'action";
+$lang['sel_actionable_type'] = array('' => 'Choisissez une action', 
+                                     'thinghttps' => "ThingHTTP",
+									 'scripts' => "Script"
+									  );
+
 /* webcam */
 $lang['download_picture'] = "Télécharger l'image";
 
@@ -229,9 +242,27 @@ $lang['cookieConsent'] = "Nous aimerions utiliser des cookies pour mieux compren
 $lang['privacy_policy'] = "politique de confidentialité";		
 
 
+$lang['script_aide'] = "<h3>Script pour Analyse</h3>
+<p>Explorer les données collectées dans un canal ou extraites d'un site Web</p>
+<ul>
+	<li>Trouvez et supprimez les mauvaises données</li>
+	<li>Convertir les données en différentes unités</li>
+	<li>Calculer de nouvelles données</li>
+	<li>Construire des modèles de données</li>
+</ul>
+<p>Après analyse, vous pouvez écrire les données sur un canal ou les publier pour partager vos résultats.</p>";	
 
-
-
+$lang['time_control_aide']="<h3>Options des tâches planifiées</h3>
+                        <ul>
+                            <li>Nom de la tâche planifiée : Saisissez un nom unique pour votre tâche planifiée.</li>
+                            <li>Minute : de 00 à 59 ou * pour toutes les minutes </li>
+                            <li>Heure : de 0 à 23 ou * pour toutes les heures </li>
+                            <li>Jour du mois : 1 à 31 ou * pour tous les jours du mois </li>
+                            <li>Mois : de 1 à 12 ou * pour tous les mois </li>
+                            <li>Jour de la semaine : de 0 à 6 (Dimanche = 0),ou * pour tous les jours </li>
+                            <li>Type d'action : Sélectionnez Requête HTTP ou script à exécuter.</li>
+                            <li>Option : Sélectionnez le script à effectuer.</li>
+                        </ul>";
 
 
 
