@@ -1,6 +1,6 @@
 /*  feuille de style  du site Aggregator     	
-     Auteur Philippe SIMIER                     
-     Version 2.0 Mai 2020
+     Auteur SNIR Touchard                      
+     Version 3.0 Mars 2021
 */	 
 
 /* Definition du corps de la page              */
@@ -29,15 +29,15 @@ body {
 /* Couleurs et type de ligne pour highcharts */
 
 .highcharts-axis.highcharts-color-0 .highcharts-axis-line {
-	stroke: #7cb5ec;
+    stroke: #7cb5ec;
 }
 
 .highcharts-axis.highcharts-color-0 text {
-	fill: #7cb5ec;
+    fill: #7cb5ec;
 }
 
 .highcharts-yaxis .highcharts-axis-line {
-	stroke-width: 1px;
+    stroke-width: 1px;
 }
 
 #customPopup 
@@ -66,9 +66,9 @@ body {
     z-index: 1999;
     opacity: 0.3;
 }
- 
 
-/* page centr�e largeur 1098  fond blanc*/
+
+/* page centrée largeur 1098  fond blanc*/
 #page {
     Background-Color: #FFF;
     margin: 0 auto;
@@ -78,13 +78,13 @@ body {
     border-style:solid;
     border-width:1px 1px 1px;
     text-align: left;
- }
+}
 
 /* la div id contenu  */
 #contenu {
     margin-top: 5px;
     min-height: 400px;
- }
+}
 
 a {
     color:#000;
@@ -102,11 +102,11 @@ a {
 }
 
 .support {
-	padding-left: 30px;
+    padding-left: 30px;
 }
 
 .copyright {
-	float: right;
+    float: right;
 }
 
 #cookieConsent {
@@ -145,18 +145,18 @@ a[data-toggle]:hover {
 
  fin du popover */	
 
-/* La r�gle  @font-face permet de d�finir les polices d'�criture 
-   � utiliser pour afficher le texte de pages web. */
+/* La régle  @font-face permet de définir les polices d'écriture 
+   à utiliser pour afficher le texte de pages web. */
 @font-face{
-	font-family:'FontAwesome';
-	src:url('../fonts/fontawesome-webfont.eot');
-	src:url('../fonts/fontawesome-webfont.eot') format('embedded-opentype'),
-	    url('../fonts/fontawesome-webfont.woff2') format('woff2'),
-		url('../fonts/fontawesome-webfont.woff') format('woff'),
-		url('../fonts/fontawesome-webfont.ttf') format('truetype'),
-		url('../fonts/fontawesome-webfont.svg#fontawesomeregular') format('svg');
-	font-weight:normal;
-	font-style:normal
+    font-family:'FontAwesome';
+    src:url('../fonts/fontawesome-webfont.eot');
+    src:url('../fonts/fontawesome-webfont.eot') format('embedded-opentype'),
+        url('../fonts/fontawesome-webfont.woff2') format('woff2'),
+        url('../fonts/fontawesome-webfont.woff') format('woff'),
+        url('../fonts/fontawesome-webfont.ttf') format('truetype'),
+        url('../fonts/fontawesome-webfont.svg#fontawesomeregular') format('svg');
+    font-weight:normal;
+    font-style:normal
 }
 
 .file-list, .file-list ul{
@@ -253,32 +253,32 @@ li.folder-sounds:before{
     text-decoration:none;
 }
 
-/* r�pertoire ruche */
+/* répertoire ruche */
 .file-list .ruche:before{
     color:#FFD04E;
     content: "\f187";
 }
-/* R�pertoire ruche ouverte */
+/* Répertoire ruche ouverte */
 .file-list .ruche.open:before{
     content: "\f187";
 }
 
-/* r�pertoire weather */
+/* répertoire weather */
 .file-list .weather:before{
     color:#FFD04E;
     content: "\f185";
 }
-/* R�pertoire weather ouverte */
+/* Répertoire weather ouverte */
 .file-list .weather.open:before{
     content: "\f185";
 }
 
-/* r�pertoire objet */
+/* répertoire objet */
 .file-list .objet:before{
     color:#FFD04E;
     content: "\f1b2";
 }
-/* R�pertoire objet ouvert */
+/* Répertoire objet ouvert */
 .file-list .objet.open:before{
     content: "\f1b2";
 }
@@ -289,13 +289,13 @@ li.folder-root ul{
     overflow:hidden;
 }
 li.folder-root.closed>ul{
-   opacity:0;
-   max-height:0px;
+    opacity:0;
+    max-height:0px;
 }
 li.folder-root.open>ul{
-   opacity:1;
-   display:block;
-   max-height:1000px;
+    opacity:1;
+    display:block;
+    max-height:1000px;
 }
 /*
 code des icones:
@@ -316,7 +316,7 @@ http://partelya.com/wp-content/themes/thegem/fonts/icons-list-fontawesome.html
     left:-14px;
 }
 .file-list li.urllink:before{
-     list-style-type: none;
+    list-style-type: none;
     font-family: FontAwesome;
     display:block;
     content:'\f045';
@@ -336,12 +336,12 @@ http://partelya.com/wp-content/themes/thegem/fonts/icons-list-fontawesome.html
     text-decoration:none;
 }
 
-/* r�pertoire data */
+/* répertoire data */
 .file-list .folder-data:before{
     color:#FFD04E;
     content: "\f1fe";
 }
-/* R�pertoire data */
+/* Répertoire data */
 .file-list .folder-data.open:before{
     content: "\f1fe";
 }
@@ -350,13 +350,13 @@ li.folder-data ul{
     overflow:hidden;
 }
 li.folder-data.closed>ul{
-   opacity:0;
-   max-height:0px;
+    opacity:0;
+    max-height:0px;
 }
 li.folder-data.open>ul{
-   opacity:1;
-   display:block;
-   max-height:1000px;
+    opacity:1;
+    display:block;
+    max-height:1000px;
 }
 
 
@@ -367,12 +367,12 @@ li.folder-data.open>ul{
     text-decoration:none;
 }
 
-/* r�pertoire matlab */
+/* répertoire matlab */
 .file-list .folder-matlab:before{
     color:#FFD04E;
     content: "\f080";
 }
-/* R�pertoire matlab */
+/* Répertoire matlab */
 .file-list .folder-matlab.open:before{
     content: "\f080";
 }
@@ -381,21 +381,21 @@ li.folder-matlab ul{
     overflow:hidden;
 }
 li.folder-matlab.closed>ul{
-   opacity:0;
-   max-height:0px;
+    opacity:0;
+    max-height:0px;
 }
 li.folder-matlab.open>ul{
-   opacity:1;
-   display:block;
-   max-height:1000px;
+    opacity:1;
+    display:block;
+    max-height:1000px;
 }
 
-/* r�pertoire sounds */
+/* répertoire sounds */
 .file-list .folder-sounds:before{
     color:#FFD04E;
     content: "\f1c7";
 }
-/* R�pertoire sounds */
+/* Répertoire sounds */
 .file-list .folder-sounds.open:before{
     content: "\f1c7";
 }
@@ -404,13 +404,13 @@ li.folder-sounds ul{
     overflow:hidden;
 }
 li.folder-sounds.closed>ul{
-   opacity:0;
-   max-height:0px;
+    opacity:0;
+    max-height:0px;
 }
 li.folder-sounds.open>ul{
-   opacity:1;
-   display:block;
-   max-height:1000px;
+    opacity:1;
+    display:block;
+    max-height:1000px;
 }
 
 /* répertoire commentaire */
@@ -427,16 +427,16 @@ li.com ul{
     overflow:hidden;
 }
 li.com.closed>ul{
-   opacity:0;
-   max-height:0px;
+    opacity:0;
+    max-height:0px;
 }
 li.com.open>ul{
-   opacity:1;
-   display:block;
-   max-height:1000px;
+    opacity:1;
+    display:block;
+    max-height:1000px;
 }
-	
-	
+
+
 
 
 

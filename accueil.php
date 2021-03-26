@@ -43,6 +43,110 @@ function makeMarker() {
         return;
     }
 }
+
+function listerChannels($id) {
+    global $lang;
+    global $bdd;
+    $sql = 'SELECT count(*) as nb FROM `channels` WHERE `thing_id`=' . $bdd->quote($id);
+    $url = '//' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']);
+
+    if ($bdd->query($sql)->fetchObject()->nb > 0) {
+        $sql = 'SELECT * FROM `channels` WHERE `thing_id`=' . $bdd->quote($id);
+        $reponse = $bdd->query($sql);
+        echo "<li  class='folder-data'><a href='#'>{$lang['Data_visualisation']}</a>\n";
+        echo "<ul id=\"channel\">\n";
+        while ($channel = $reponse->fetchObject()) {
+            echo "<li>\n";
+            echo "<a class='channels' href='{$url}/channels/{$channel->id}/feeds.json?results=0' target='_blank' >{$channel->name}</a>\n";
+            echo "</li>\n";
+        }
+        echo "</ul>\n";
+        echo "</li>\n";
+    }
+}
+
+function listerMatlabVisu($id) {
+    global $lang;
+    global $bdd;
+    try {
+    $sql = "SELECT count(*) as nb FROM `Matlab_Visu` WHERE `things_id`={$id}";
+    if ($bdd->query($sql)->fetchObject()->nb > 0) {
+        $sql = "SELECT * FROM `Matlab_Visu` WHERE `things_id`={$id}";
+        $reponse2 = $bdd->query($sql);
+        echo "<li  class='folder-matlab'><a href='#'>{$lang['Data_Analysis']}</a>\n";
+        echo "<ul>\n";
+        while ($matalVisu = $reponse2->fetchObject()) {
+            echo "<li class='analysis'>\n";
+            echo '<a target=_blank" href="./MatlabVisualization?id=' . $matalVisu->thing_speak_id . '&name=' . urlencode($matalVisu->name) . '">' . $matalVisu->name . '</a>';
+            echo '</li>';
+        }
+        echo "</ul>\n";
+        echo "</li>\n";
+    }
+    } catch (\PDOException $ex) {
+        die('Erreur BDD: ' . $ex->getMessage());
+    }
+}
+
+function listerSons($id) {
+    global $lang;
+    global $bdd;
+    try {
+        $sql = "SELECT COUNT(*) as nb FROM `things` WHERE  `soundFolder` is NOT NULL AND `id` ={$id}";
+        $url = '//' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']);
+
+        if ($bdd->query($sql)->fetchObject()->nb > 0) {
+            echo "<li  class='folder-sounds'><a href='{$url}/sounds?id={$id}'>{$lang['Sounds']}</a>\n";
+            echo "</li>\n";
+        }
+    } catch (\PDOException $ex) {
+        die('Erreur BDD: ' . $ex->getMessage());
+    }
+}
+
+function listerCom($id) {
+    global $lang;
+    global $bdd;
+    try {
+        $sql = "SELECT count(*) as nb FROM `things` WHERE `blogStatus` = \"public\" AND `id`={$id}";
+        $url = '//' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']);
+
+        if ($bdd->query($sql)->fetchObject()->nb > 0) {
+            echo "<li  class='com'><a href='{$url}/blogs?id={$id}'>{$lang['Logbook']}</a>\n";
+            echo "</li>\n";
+        }
+    } catch (\PDOException $ex) {
+        die('Erreur BDD: ' . $ex->getMessage());
+    }
+}
+
+function afficherArbre() {
+    global $lang;
+    global $bdd;
+    try {
+        if (!isset($_SESSION['id']))
+            $sql = 'SELECT * FROM `things` where status = "public";';
+        else if ($_SESSION['droits'] == 1)
+            $sql = "SELECT * FROM `things` where user_id = " . $_SESSION['id'];
+        else   // C'est un administrateur qui est connecté
+            $sql = "SELECT * FROM `things`";
+
+        $reponse = $bdd->query($sql);
+        while ($thing = $reponse->fetchObject()) {
+            echo '<li class="folder-root ' . $thing->class . '">	<a href="#">' . $thing->name . '</a><ul>';
+            listerCom($thing->id);
+			listerChannels($thing->id);
+            listerMatlabVisu($thing->id);
+            listerSons($thing->id);
+            echo '</ul></li>';
+        }
+        $reponse->closeCursor();
+    } catch (\PDOException $ex) {
+        echo "erreur BDD";
+        die('Erreur : ' . $ex->getMessage());
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -185,108 +289,13 @@ function makeMarker() {
     </head>
 
     <body>
-<?php require_once 'menu.php'; ?>
+        <?php require_once 'menu.php'; ?>
         <div class="container" style="padding-top: 75px;">
             <div class="row">
                 <div class="col-md-4 col-sm-12 col-xs-12">
                     <div class="popin" style="margin: 0px; padding : 4px;">
                         <ul class="file-tree ">
-<?php
-try {
-
-    function listerChannels($id) {
-        global $lang;
-        global $bdd;
-        $sql = 'SELECT count(*) as nb FROM `channels` WHERE `thing_id`=' . $bdd->quote($id);
-        $url = '//' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']);
-
-        if ($bdd->query($sql)->fetchObject()->nb > 0) {
-            $sql = 'SELECT * FROM `channels` WHERE `thing_id`=' . $bdd->quote($id);
-            $reponse = $bdd->query($sql);
-            echo "<li  class='folder-data'><a href='#'>{$lang['Data_visualisation']}</a>\n";
-            echo "<ul id=\"channel\">\n";
-            while ($channel = $reponse->fetchObject()) {
-                echo "<li>\n";
-                echo "<a class='channels' href='{$url}/channels/{$channel->id}/feeds.json?results=0' target='_blank' >{$channel->name}</a>\n";
-                echo "</li>\n";
-            }
-            echo "</ul>\n";
-            echo "</li>\n";
-        }
-    }
-
-    function listerMatlabVisu($id) {
-        global $lang;
-        global $bdd;
-        $sql = "SELECT count(*) as nb FROM `Matlab_Visu` WHERE `things_id`={$id}";
-        if ($bdd->query($sql)->fetchObject()->nb > 0) {
-            $sql = "SELECT * FROM `Matlab_Visu` WHERE `things_id`={$id}";
-            $reponse2 = $bdd->query($sql);
-            echo "<li  class='folder-matlab'><a href='#'>{$lang['Data_Analysis']}</a>\n";
-            echo "<ul>\n";
-            while ($matalVisu = $reponse2->fetchObject()) {
-                echo "<li class='analysis'>\n";
-                echo '<a target=_blank" href="./MatlabVisualization?id=' . $matalVisu->thing_speak_id . '&name=' . urlencode($matalVisu->name) . '">' . $matalVisu->name . '</a>';
-                echo '</li>';
-            }
-            echo "</ul>\n";
-            echo "</li>\n";
-        }
-    }
-
-    function listerSons($id) {
-        global $lang;
-        global $bdd;
-        $sql = "SELECT COUNT(*) as nb FROM `things` WHERE  `soundFolder` is NOT NULL AND `id` ={$id}";
-        $url = '//' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']);
-
-        if ($bdd->query($sql)->fetchObject()->nb > 0) {
-            echo "<li  class='folder-sounds'><a href='{$url}/sounds?id={$id}'>Sounds</a>\n";
-
-
-            echo "</li>\n";
-        }
-    }
-
-    function listerCom($id) {
-        global $lang;
-        global $bdd;
-        $sql = "SELECT count(*) as nb FROM blogs WHERE `thing_id`={$id}";
-        $url = '//' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']);
-
-        if ($bdd->query($sql)->fetchObject()->nb > 0) {
-            echo "<li  class='com'><a href='{$url}/blogs?id={$id}'>Journal de bord</a>\n";
-
-
-
-            echo "</li>\n";
-        }
-    }
-
-    if (!isset($_SESSION['id']))
-        $sql = 'SELECT * FROM `things` where status = "public";';
-    else if ($_SESSION['droits'] == 1)
-        $sql = "SELECT * FROM `things` where user_id = " . $_SESSION['id'];
-    else   // C'est un administrateur qui est connecté
-        $sql = "SELECT * FROM `things`";
-
-    $reponse = $bdd->query($sql);
-    while ($thing = $reponse->fetchObject()) {
-        echo '<li class="folder-root ' . $thing->class . '">	<a href="#">' . $thing->name . '</a>';
-        echo '<ul>';
-        listerChannels($thing->id);
-        listerMatlabVisu($thing->id);
-        listerSons($thing->id);
-        listerCom($thing->id);
-        echo '</ul>';
-        echo '</li>';
-    }
-    $reponse->closeCursor();
-} catch (\PDOException $ex) {
-    echo "erreur BDD";
-    die('Erreur : ' . $ex->getMessage());
-}
-?>								
+                            <?php afficherArbre(); ?>								
                         </ul>
                     </div>
                 </div>
@@ -296,10 +305,10 @@ try {
                     </div>
                 </div>
             </div>
-<?php
-require_once 'piedDePage.php';
-require_once 'cookieConsent.php';
-?>
+            <?php
+            require_once 'piedDePage.php';
+            require_once 'cookieConsent.php';
+            ?>
         </div>
         <!--Fenêtre Modal -->
         <div class="modal" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenter" aria-hidden="true">

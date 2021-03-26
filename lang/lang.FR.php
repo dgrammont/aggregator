@@ -34,6 +34,8 @@ $lang['My_Account'] = "Mon compte";
 $lang['docs_page'] = "Documentation Aggregator pour cette page";
 $lang['Data_visualisation'] = "Visualisation des données";
 $lang['Data_Analysis'] = "Analyse des données";
+$lang['Sounds'] = "Enregistrements sonors";
+$lang['Logbook'] = "Journal de bord";
 
 /* thingView */
 $lang['hightchart'] = '{
