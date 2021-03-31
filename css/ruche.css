@@ -435,6 +435,12 @@ li.com.open>ul{
     display:block;
     max-height:1000px;
 }
+/* Balise Audio */
+
+audio {
+	height: 30px;
+	
+}
 
 
 
