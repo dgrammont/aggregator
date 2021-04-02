@@ -166,6 +166,12 @@ $lang['sel_actionable_type'] = array('' => 'Choose your action',
     'scripts' => "Script"
 );
 
+/* Blogs */
+$lang['blog'] = "Blog";
+$lang['title'] = "Title";
+$lang['subtitle']= "Subtitle";
+$lang['release_date'] = "Release date";
+
 
 /* webcam */
 $lang['download_picture'] = "Download picture";

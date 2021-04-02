@@ -112,7 +112,7 @@ function listerCom($id) {
         $url = '//' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']);
 
         if ($bdd->query($sql)->fetchObject()->nb > 0) {
-            echo "<li  class='com'><a href='{$url}/blogs?id={$id}'>{$lang['Logbook']}</a>\n";
+            echo "<li  class='com'><a href='{$url}/administration/blogs?id={$id}'>{$lang['Logbook']}</a>\n";
             echo "</li>\n";
         }
     } catch (\PDOException $ex) {

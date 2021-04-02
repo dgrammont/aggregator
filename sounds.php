@@ -230,7 +230,7 @@ function AfficherSupprimer($thing) {
 
             <div class="row popin card">
                 <div class="col-md-12 col-sm-12 col-xs-12">    
-                    <div  class="card-header" style=""><h4>Enregistrements sonors</h4></div>
+                    <div  class="card-header" style=""><h4>Enregistrements sonores</h4></div>
                     <form method="post" id="supprimer">
                         <input type='hidden' name='soundFolder' value = '<?= $thing->soundFolder ?>' />
                         <div class="table-responsive">
