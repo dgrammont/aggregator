@@ -217,7 +217,7 @@ function afficherFormTimeControl($timeControl, $selectUser) {
                         $.alert({
                             theme: 'bootstrap',
                             title: 'Alerte',
-                            content: "Veuillez entrer une valeur comprise entre 0 et 23 "
+                            content: "Veuillez faire correspondre avec le format crontab "
                         });
                     }
 
@@ -229,7 +229,7 @@ function afficherFormTimeControl($timeControl, $selectUser) {
                         $.alert({
                             theme: 'bootstrap',
                             title: 'Alerte',
-                            content: "Veuillez faire correspondre avec le format demandé entre 0 et 6 ou * "
+                            content: "Veuillez faire correspondre avec le format crontab "
                         });
                     }
                 });
@@ -241,7 +241,7 @@ function afficherFormTimeControl($timeControl, $selectUser) {
                         $.alert({
                             theme: 'bootstrap',
                             title: 'Alerte',
-                            content: "Veuillez faire correspondre avec le format demandé entre 0 et 31 ou * "
+                            content: "Veuillez faire correspondre avec le format crontab "
                         });
                     }
                 });
@@ -252,7 +252,7 @@ function afficherFormTimeControl($timeControl, $selectUser) {
                         $.alert({
                             theme: 'bootstrap',
                             title: 'Alerte',
-                            content: "Veuillez faire correspondre avec le format demandé entre 1 et 12 ou * "
+                            content: "Veuillez faire correspondre avec le format crontab "
                         });
                     }
                 });
