@@ -34,8 +34,10 @@ $lang['My_Account'] = "Mon compte";
 $lang['docs_page'] = "Documentation Aggregator pour cette page";
 $lang['Data_visualisation'] = "Visualisation des données";
 $lang['Data_Analysis'] = "Analyse des données";
-$lang['Sounds'] = "Enregistrements sonors";
+$lang['Sounds'] = "Enregistrements sonores";
 $lang['Logbook'] = "Journal de bord";
+$lang['incorrect'] = "Incorrectes! Vérifiez vos identifiant et mot de passe.";
+$lang['keep_me'] = "Maintenir ma connexion sur cet ordinateur";
 
 /* thingView */
 $lang['hightchart'] = '{
@@ -97,6 +99,7 @@ $lang['elevation'] = "Altitude";
 $lang['class'] = "Catégorie";
 $lang['classes'] = array('ruche' => "Ruche", 'objet' => 'Objet', 'weather' => 'Station météo');
 $lang['sel_status'] = array('private' => "Privé", 'public' =>"Public" );
+$lang['sel_blogStatus'] = array('private' => "Privé", 'public' =>"Public", 'off' => "Off" );
 
 /* User formulaire */
 $lang['sel_language'] = array('FR' => "Français", 'EN' => "Anglais" );
@@ -166,11 +169,31 @@ $lang['sel_actionable_type'] = array('' => 'Choisissez une action',
 									 'scripts' => "Script"
 									  );
 
+/* Script */
+$lang['output']="Sortie";
+$lang['run']="Exécuter";
+$lang['language']="Langage";
+$lang['code']="Code";
+$lang['insertCode']="#Mettre votre code ici\n";
+$lang['alertSetting']="Vous n'avez sélectionné aucun script !";
+$lang['alertSettings']="Vous avez sélectionné plusieurs script !";
+
+/* sounds */
+$lang['sounds'] = "sons";
+$lang['sound_recordings'] = "Enregistrements sonores";
+$lang['spectrogram'] = "Spectrogramme";
+$lang['player'] = "Lecteur";
+
+
+
+
 /* Blogs */
 $lang['blog'] = "Journal de bord";
 $lang['title'] = "Titre";
-$lang['subtitle']= "Sous-titre";
+$lang['keyWord']= "Mots-clés";
+$lang['comment']= "Commentaire";
 $lang['release_date'] = "Date de parution";
+$lang['time'] = "Heure";
 
 /* webcam */
 $lang['download_picture'] = "Télécharger l'image";
@@ -199,6 +222,10 @@ $lang['select_condition'] = array(	'gt' => "est supérieur à",
 
 $lang['select_react_type'] = array ('0' => "Exécuter l'action uniquement la première fois que la condition est remplie",
                                     '1' => "Exécuter une action chaque fois que la condition est remplie");
+
+/* import export */
+$lang['upload_CSV']    = "Téléchargez un fichier CSV pour importer des données dans ce canal.";
+$lang['download_CSV']  = "Téléchargez tous les flux de ce canal au format CSV.";
 
 //------------Aide pour les formulaires ---------------//
 $lang['react_aide'] = "<h3>Options du déclencheur</h3>
@@ -273,7 +300,11 @@ $lang['time_control_aide']="<h3>Options des tâches planifiées</h3>
                         </ul>";
 
 
-
+$lang['importexport_aide'] = "<h3>Aide</h3>
+					<hr>
+					<h5>Import</h5>
+					<p>Le format correct pour l'importation de données est fourni dans ce fichier de modèle d'importation CSV. 
+					Utilisez les noms de champ field1, field2, etc., au lieu des noms de champ personnalisés.</p>";	
 
 
 

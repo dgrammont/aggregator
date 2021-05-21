@@ -50,7 +50,8 @@
 	language.xDateFormat = "<?= $lang['xDateFormat'] ?>";
 	
 	let urlAggregator = "https://api.thingspeak.com";
-	//let urlAggregator =   "http://touchardinforeseau.servehttp.com/Ruche";
+	//let urlAggregator =   "https://philippes.ddns.net/Ruche/";
+	//let urlAggregator = "proxy";
 	
     
 	

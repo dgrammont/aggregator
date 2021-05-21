@@ -1,10 +1,11 @@
 <?php
 
-/** fichier		 : api/Api.php
+/** 
+  fichier		 : api/Api.php
   description  : Class pour simplifier l'écriture des API http
-  author       : Philippe SIMIER Lycée Touchard Le Mans
+  author       : Lycée Touchard Le Mans
 
- * */
+ **/
 
 namespace Aggregator\Support;
 

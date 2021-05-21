@@ -14,7 +14,7 @@ $lang['edit_settings'] = "Settings";
 $lang['delete'] = "Delete";
 $lang['Cancel'] = "Cancel";
 $lang['Apply'] = "Apply";
-$lang['Validate'] = "Valider";
+$lang['Validate'] = "Validate";
 $lang['close'] = "Close";
 $lang['display'] = "Display";
 $lang['refuse'] = "Refuse";
@@ -36,6 +36,8 @@ $lang['Data_visualisation'] = "Data visualisation";
 $lang['Data_Analysis'] = "Data Analysis";
 $lang['Sounds'] = "Sound recordings";
 $lang['Logbook'] = "LogBook";
+$lang['incorrect'] = "Incorrect! Check your username and password.";
+$lang['keep_me'] = "Keep me logged in on this computer";
 
 /* thingView */
 $lang['hightchart'] = '{
@@ -97,6 +99,7 @@ $lang['elevation'] = "Elevation";
 $lang['class'] = "Category";
 $lang['classes'] = array('ruche' => "beehive", 'objet' => 'thing', 'weather' => 'weather station');
 $lang['sel_status'] = array('private' => "private", 'public' => "public");
+$lang['sel_blogStatus'] = array('private' => "Privé", 'public' =>"Public", 'off' => "Off" );
 
 /* User formulaire */
 $lang['sel_language'] = array('FR' => "French", 'EN' => "English");
@@ -166,11 +169,31 @@ $lang['sel_actionable_type'] = array('' => 'Choose your action',
     'scripts' => "Script"
 );
 
+/* Script */
+$lang['output']="Output";
+$lang['run']="Run";
+$lang['language']="Language";
+$lang['code']="Code";
+$lang['insertCode']="#Insert your code here\n";
+$lang['alertSetting']="You have not selected any script !";
+$lang['alertSettings']="You have selected several scripts !";
+
+/* sounds */
+$lang['sounds'] = "sounds";
+$lang['sound_recordings'] = "Sounds recordings";
+$lang['spectrogram'] = "Spectrogram";
+$lang['player'] = "Player";
+
+
+
+
 /* Blogs */
 $lang['blog'] = "Blog";
 $lang['title'] = "Title";
-$lang['subtitle']= "Subtitle";
+$lang['keyWord']= "Keywords";
+$lang['comment']= "Comment";
 $lang['release_date'] = "Release date";
+$lang['time'] = "Time";
 
 
 /* webcam */
@@ -200,6 +223,10 @@ $lang['select_condition'] = array('gt' => 'is greater than',
 
 $lang['select_react_type'] = array('0' => 'Run action only the first time the condition is met',
     '1' => 'Run action each time condition is met');
+
+/* import export */
+$lang['upload_CSV'] = "Upload a CSV file to import data into this channel.";
+$lang['download_CSV']  = "Download all of this Channel's feeds in CSV format.";
 
 //------------Aide pour les formulaires ---------------//
 $lang['react_aide'] = "<h3>React Settings</h3>
@@ -261,15 +288,21 @@ $lang['script_aide'] = "<h3>Script Analysis</h3>
 </ul>
 <p>After analysis, you can write data to the channel or publish it to share your results.</p>";
 
-$lang['time_control_aide'] = "<h3>Options des tâches planifiées</h3>
+$lang['time_control_aide'] = "<h3>Scheduled task options</h3>
                         <ul>
-                            <li>Nom de la tâche planifiée : Saisissez un nom unique pour votre tâche planifiée.</li>
-                            <li>Minute : de 00 à 59 ou * pour toutes les minutes </li>
-                            <li>Heure : de 0 à 23 ou * pour toutes les heures </li>
-                            <li>Jour du mois : 1 à 31 ou * pour tous les jours du mois </li>
-                            <li>Mois : de 1 à 12 ou * pour tous les mois </li>
-                            <li>Jour de la semaine : de 0 à 6 (Dimanche = 0), tous les jours de la semaine si *</li>
-                            <li>Type d'action : Sélectionnez Requête HTTP ou script à exécuter </li>
-                            <li>Option : Sélectionnez le script à effectuer.</li>
+                            <li>Scheduled task name : Enter a unique name for your scheduled task.</li>
+                            <li>Minute : from 00 to 59 or * for every minute</li>
+                            <li>Hour : from 0 to 23 or * for all hours</li>
+                            <li>Day of the month : 1 to 31 or * for all the days of the month</li>
+                            <li>Months : from 1 to 12 or * for all months</li>
+                            <li>Day of the week : from 0 to 6 (Sunday = 0) or * for every day of the week</li>
+                            <li>Action type : Select HTTP request or script to run</li>
+                            <li>Option : Select the script to perform.</li>
                         </ul>";
+						
+$lang['importexport_aide'] = "<h3>Aide</h3>
+					<hr>
+					<h5>Import</h5>
+					<p>The correct format for data import is provided in this CSV Import Template File. 
+					Use the field names field1, field2, and so on, instead of custom field names.</p>";					
 ?>

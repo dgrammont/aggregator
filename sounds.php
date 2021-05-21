@@ -1,4 +1,11 @@
 <?php
+/**
+ * @fichier  administration/support/administration/index.php							    		
+ * @auteur   Dylan Grammont (Touchard Washington le Mans)
+ * @date     Mai 2021
+ * @version  v1.0 - First release						
+ * @details 
+ */
 session_start();
 
 require_once('definition.inc.php');
@@ -8,11 +15,11 @@ require_once('lang/lang.conf.php');
 
 use Aggregator\Support\Api;
 
-// connexion à la base
+/* connexion à la base */
 $bdd = Api::connexionBD(BASE);
 
-// Si le formulaire a été soumis
-// On suprimme les fichiers demandés
+/* Si le formulaire a été soumis */
+/* On suprimme les fichiers demandés */
 if (isset($_POST['btn_supprimer'])) {
     foreach ($_POST["delete"] as $value) {
         $soundFile = $_POST["soundFolder"] . "/".$value;
@@ -26,7 +33,7 @@ if (isset($_POST['btn_supprimer'])) {
     }
 }
 
-// Création de l'objet thing
+/* Création de l'objet thing */
 $thing_id = Api::obtenir("id", FILTER_VALIDATE_INT);
 try {
     $sql = "SELECT * FROM `things` where id={$thing_id}";
@@ -37,7 +44,7 @@ try {
     return;
 }
 
-// fonction pour lister les fichiers audio appartenant à un objet
+/* fonction pour lister les fichiers audio appartenant à un objet */
 function listeFichiersAudio($thing) {
 
     $nb_fichier = 0;
@@ -67,7 +74,12 @@ function listeFichiersAudio($thing) {
     
 }
 
-// Fonction pour afficher le bouton supprimer
+/**
+ * 
+ * @global type $lang
+ * @param type $thing
+ * @detail Fonction pour afficher le bouton supprimer
+ */
 function AfficherSupprimer($thing) {
     global $lang;
     if (isset($_SESSION["id"])) {
@@ -230,7 +242,7 @@ function AfficherSupprimer($thing) {
 
             <div class="row popin card">
                 <div class="col-md-12 col-sm-12 col-xs-12">    
-                    <div  class="card-header" style=""><h4>Enregistrements sonores</h4></div>
+                    <div  class="card-header" style=""><h4><?=$lang['sound_recordings']?></h4></div>
                     <form method="post" id="supprimer">
                         <input type='hidden' name='soundFolder' value = '<?= $thing->soundFolder ?>' />
                         <div class="table-responsive">
@@ -239,9 +251,9 @@ function AfficherSupprimer($thing) {
                                     <tr>
                                         <th><input type='checkbox' name='all' value='all' id='all' ></th>
                                         <th>Date</th>
-                                        <th>Lecteur</th>
+                                        <th><?=$lang['player']?></th>
                                         <th>Informations</th>
-                                        <th>Spectrogramme</th>
+                                        <th><?= $lang['spectrogram'] ?></th>
 
                                     </tr>
                                 </thead>
@@ -262,4 +274,3 @@ function AfficherSupprimer($thing) {
 
 
     </body>
-

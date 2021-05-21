@@ -50,7 +50,7 @@ if( !empty($_POST['envoyer'])){
 		// destruction du tokenCSRF
 		unset($_SESSION['tokenCSRF']);
 		
-		header("Location: comSigfox.php");
+		header("Location: comSigfox.php?id={$_POST['idDevice']}");
 		return;
 	}	
 }
@@ -70,7 +70,12 @@ else
 			$callback = new stdClass();
 			$callback->action = "insert";
 			$callback->id = 0;
-			$callback->idDevice = "";
+			if (isset($_GET['idDevice'])){
+				$callback->idDevice = $_GET['idDevice'];
+			}else{
+				$callback->idDevice = "";
+			}
+			
 			$callback->type = NULL;
 			$callback->url = "";
 			$callback->write_api_key = "";
@@ -153,7 +158,15 @@ else
 							<div class="form-group">
 								</br>
 								<button type="submit" class="btn btn-primary" value="Valider" name="envoyer" > <?= $lang['Apply'] ?></button>
-								<a  class="btn btn-info" role="button" href="comSigfox"><?= $lang['Cancel']?></a>
+								<a  class="btn btn-info" role="button" href="comSigfox?id=
+								<?php 
+								if (isset($_GET['idDevice'])){
+									echo $_GET['idDevice'].'">';
+								}else{
+									echo $callback->idDevice.'">';
+								}
+
+								echo $lang['Cancel']?></a>
 							</div>	
 					</form>
 				</div>

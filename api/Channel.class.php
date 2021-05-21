@@ -50,17 +50,14 @@ class Channel {
     public function write(...$arg) {
         // Le nombre d'arguments doit être paire
         if ((count($arg) % 2) != 0) {
-            return -1;
+            return 0;
         } else {
 
             for ($i = 0; $i < count($arg); $i++) {
                 $field[] = $arg[$i++];
                 $value[] = $arg[$i];
             }
-            // Vérification les values doivent être numériques
-            foreach ($field as $val) {
-                if(!is_numeric($val)) return -1;
-            }
+
             // Création de la requête
             $sql = "INSERT INTO `data`.`feeds` (`id_channel` ";
             foreach ($field as $val) {

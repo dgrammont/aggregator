@@ -1,4 +1,11 @@
-<?php 
+<?php
+/**
+ * @fichier  administration/support/administration/index.php							    		
+ * @auteur   Léo Cognard (Touchard Washington le Mans)
+ * @date     Mai 2021
+ * @version  v1.0 - First release						
+ * @details  
+ */
 include "authentification/authcheck.php" ;
 
 require_once('../definition.inc.php');
@@ -9,12 +16,12 @@ require_once('../lang/lang.conf.php');
 use Aggregator\Support\Api;
 use Aggregator\Support\Str;
 
-// connexion à la base
+/* connexion à la base */
 $bdd = Api::connexionBD(BASE, $_SESSION['time_zone']);
 
-// Si le formulaire a été soumis
+/* Si le formulaire a été soumis */
 if(isset($_POST['btn_supprimer'])){
-	// Si un élément a été sélectionné création de la liste des id à supprimer
+	/* Si un élément a été sélectionné création de la liste des id à supprimer */
 	if (count($_POST['table_array']) > 0){
 		$Clef=$_POST['table_array'];
 		$supp = "(";
@@ -32,7 +39,11 @@ if(isset($_POST['btn_supprimer'])){
 
 
 
-
+/**
+ * 
+ * @detail affiche le tableau des scripts 
+ * 
+ */
 function afficherScripts(){
 	
 	global $bdd;
@@ -146,7 +157,7 @@ function afficherScripts(){
 				$.alert({
 				theme: 'bootstrap',
 				title: 'Alert!',
-				content: "Vous n'avez sélectionné aucun script !"
+				content: "<?=$lang['alertSetting'] ?>"
 				});
 			}
 		});	
@@ -166,14 +177,14 @@ function afficherScripts(){
 				$.alert({
 					theme: 'bootstrap',
 					title: 'Alert!',
-					content: "Vous n'avez sélectionné aucun script !"
+					content: "<?=$lang['alertSetting'] ?>"
 				});
 			}
 			if(checkbox_val.length > 1){
 				$.alert({
 					theme: 'bootstrap',
 					title: 'Alert!',
-					content: "Vous avez sélectionné plusieurs script !"
+					content: "<?=$lang['alertSettings'] ?>"
 				});
 			}
 			if(checkbox_val.length == 1){

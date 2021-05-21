@@ -154,14 +154,14 @@ if (isset($_POST['btn_supprimer'])) {
                         });
                     }
                     if (checkbox_val.length == 1) {
-                    console.log("blog?id" + checkbox_val[0]);
-                       window.location = 'blog?id=' + checkbox_val[0];
+                        console.log("blog?id" + checkbox_val[0]);
+                        window.location = 'blog?id=' + checkbox_val[0];
                     }
                 });
 
                 $("#btn_add").click(function () {
                     console.log("Bouton Ajouter cliqué");
-                    window.location = 'blog'
+                    window.location = 'blog?thingId=<?= $_GET["id"] ?>'
                 });
             });
 

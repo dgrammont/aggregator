@@ -169,7 +169,7 @@ a[data-toggle]:hover {
 }
 .file-list li{
     position: relative;
-    padding-left:25px;
+    padding-left:30px;
 }
 .file-list li a{
     text-decoration: none;

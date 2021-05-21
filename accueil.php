@@ -1,4 +1,11 @@
 <?php
+/**
+@fichier  support/timeControl.php							    		
+@auteur   Léo Cognard (Touchard Washington le Mans)
+@date     May 2021
+@version  v1.0 - First release						
+@details  support pour la page administration/timeControl.php
+ */
 require_once 'cookieConfirm.php';
 require_once('definition.inc.php');
 require_once('./api/Api.php');
@@ -8,17 +15,19 @@ use Aggregator\Support\Api;
 use Aggregator\Support\Str;
 
 $bdd = Api::connexionBD(BASE);
+$url = '//' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']);
 
 function makeMarker() {
 
     global $bdd;
     try {
-        if (!isset($_SESSION['id'])) // Personne n'est connecté donc objet publique
+        if (!isset($_SESSION['id'])) { // Personne n'est connect� donc objet publique
             $sql = 'SELECT * FROM `things` where status = "public";';
-        else if ($_SESSION['id'] != 0)
+        } else if ($_SESSION['id'] != 0) {
             $sql = "SELECT * FROM `things` where user_id = " . $_SESSION['id'];
-        else   // C'est root qui est connecté, tous les objets sont affichés
+        } else {   // C'est root qui est connect�, tous les objets sont affich�s
             $sql = "SELECT * FROM `things`";
+        }
 
         $reponse = $bdd->query($sql);
         $marker = "var markers = [\n";
@@ -47,8 +56,9 @@ function makeMarker() {
 function listerChannels($id) {
     global $lang;
     global $bdd;
+    global $url;
+
     $sql = 'SELECT count(*) as nb FROM `channels` WHERE `thing_id`=' . $bdd->quote($id);
-    $url = '//' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']);
 
     if ($bdd->query($sql)->fetchObject()->nb > 0) {
         $sql = 'SELECT * FROM `channels` WHERE `thing_id`=' . $bdd->quote($id);
@@ -57,7 +67,7 @@ function listerChannels($id) {
         echo "<ul id=\"channel\">\n";
         while ($channel = $reponse->fetchObject()) {
             echo "<li>\n";
-            echo "<a class='channels' href='{$url}/channels/{$channel->id}/feeds.json?results=0' target='_blank' >{$channel->name}</a>\n";
+            echo "<a class='channels' href='{$url}/channels/{$channel->id}/feeds.json?results=0' >{$channel->name}</a>\n";
             echo "</li>\n";
         }
         echo "</ul>\n";
@@ -69,20 +79,20 @@ function listerMatlabVisu($id) {
     global $lang;
     global $bdd;
     try {
-    $sql = "SELECT count(*) as nb FROM `Matlab_Visu` WHERE `things_id`={$id}";
-    if ($bdd->query($sql)->fetchObject()->nb > 0) {
-        $sql = "SELECT * FROM `Matlab_Visu` WHERE `things_id`={$id}";
-        $reponse2 = $bdd->query($sql);
-        echo "<li  class='folder-matlab'><a href='#'>{$lang['Data_Analysis']}</a>\n";
-        echo "<ul>\n";
-        while ($matalVisu = $reponse2->fetchObject()) {
-            echo "<li class='analysis'>\n";
-            echo '<a target=_blank" href="./MatlabVisualization?id=' . $matalVisu->thing_speak_id . '&name=' . urlencode($matalVisu->name) . '">' . $matalVisu->name . '</a>';
-            echo '</li>';
+        $sql = "SELECT count(*) as nb FROM `Matlab_Visu` WHERE `things_id`={$id}";
+        if ($bdd->query($sql)->fetchObject()->nb > 0) {
+            $sql = "SELECT * FROM `Matlab_Visu` WHERE `things_id`={$id}";
+            $reponse2 = $bdd->query($sql);
+            echo "<li  class='folder-matlab'><a href='#'>{$lang['Data_Analysis']}</a>\n";
+            echo "<ul>\n";
+            while ($matalVisu = $reponse2->fetchObject()) {
+                echo "<li class='analysis'>\n";
+                echo '<a  href="./MatlabVisualization?id=' . $matalVisu->thing_speak_id . '&name=' . urlencode($matalVisu->name) . '">' . $matalVisu->name . '</a>';
+                echo '</li>';
+            }
+            echo "</ul>\n";
+            echo "</li>\n";
         }
-        echo "</ul>\n";
-        echo "</li>\n";
-    }
     } catch (\PDOException $ex) {
         die('Erreur BDD: ' . $ex->getMessage());
     }
@@ -91,12 +101,13 @@ function listerMatlabVisu($id) {
 function listerSons($id) {
     global $lang;
     global $bdd;
+    global $url;
     try {
         $sql = "SELECT COUNT(*) as nb FROM `things` WHERE  `soundFolder` is NOT NULL AND `id` ={$id}";
-        $url = '//' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']);
 
         if ($bdd->query($sql)->fetchObject()->nb > 0) {
-            echo "<li  class='folder-sounds'><a href='{$url}/sounds?id={$id}'>{$lang['Sounds']}</a>\n";
+            echo "<li  class='folder-sounds'>\n";
+            echo "<a href='{$url}/sounds?id={$id}'>{$lang['Sounds']}</a>\n";
             echo "</li>\n";
         }
     } catch (\PDOException $ex) {
@@ -107,12 +118,16 @@ function listerSons($id) {
 function listerCom($id) {
     global $lang;
     global $bdd;
+    global $url;
     try {
-        $sql = "SELECT count(*) as nb FROM `things` WHERE `blogStatus` = \"public\" AND `id`={$id}";
-        $url = '//' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']);
+        if (isset($_SESSION["login"])) {
+            $sql = "SELECT count(*) as nb FROM `things` WHERE `blogStatus` != \"off\" AND `id`={$id}";
+        } else {
+            $sql = "SELECT count(*) as nb FROM `things` WHERE `blogStatus` = \"public\" AND `id`={$id}";
+        }
 
         if ($bdd->query($sql)->fetchObject()->nb > 0) {
-            echo "<li  class='com'><a href='{$url}/administration/blogs?id={$id}'>{$lang['Logbook']}</a>\n";
+            echo "<li  class='com'><a href='{$url}/blogs?id={$id}'>{$lang['Logbook']}</a>\n";
             echo "</li>\n";
         }
     } catch (\PDOException $ex) {
@@ -121,24 +136,23 @@ function listerCom($id) {
 }
 
 function afficherArbre() {
-    global $lang;
     global $bdd;
     try {
-        if (!isset($_SESSION['id']))
-            $sql = 'SELECT * FROM `things` where status = "public";';
-        else if ($_SESSION['droits'] == 1)
+        if (isset($_SESSION['droits']) && $_SESSION['droits'] == 1) {
             $sql = "SELECT * FROM `things` where user_id = " . $_SESSION['id'];
-        else   // C'est un administrateur qui est connecté
+        } else if (isset($_SESSION['droits']) && $_SESSION['droits'] > 1) { // C'est un administrateur qui est connect�
             $sql = "SELECT * FROM `things`";
-
+        } else {
+            $sql = 'SELECT * FROM `things` where status = "public";';
+        }
         $reponse = $bdd->query($sql);
         while ($thing = $reponse->fetchObject()) {
-            echo '<li class="folder-root ' . $thing->class . '">	<a href="#">' . $thing->name . '</a><ul>';
+            echo "<li class=\"folder-root {$thing->class} \"><a href=\"#\">{$thing->name}</a><ul>\n";
             listerCom($thing->id);
-			listerChannels($thing->id);
+            listerChannels($thing->id);
             listerMatlabVisu($thing->id);
             listerSons($thing->id);
-            echo '</ul></li>';
+            echo "</ul></li>\n";
         }
         $reponse->closeCursor();
     } catch (\PDOException $ex) {
@@ -146,7 +160,6 @@ function afficherArbre() {
         die('Erreur : ' . $ex->getMessage());
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -155,7 +168,6 @@ function afficherArbre() {
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <title><?= $lang['Browse_Sites'] ?> - Aggregator</title>
-        <!-- Bootstrap CSS version 4.1.1 -->
         <link rel="stylesheet" href="css/bootstrap.min.css" />
         <link rel="stylesheet" href="css/ruche.css" />
 
@@ -164,45 +176,46 @@ function afficherArbre() {
         <script src="scripts/file-explore.js"></script>
 
         <script type="text/javascript">
+            "use strict";
+
             $(document).ready(function () {
                 $(".file-tree").filetree();
                 $(".channels").click(afficheModal);
                 $(".btn-afficher").click(afficherVue);
 
                 // Asynchronously Load the map API 
-                var script = document.createElement('script');
-                script.src = "//maps.googleapis.com/maps/api/js?key=AIzaSyBKUqx5vjYkrX15OOMAxFbOkGjDfAPL1J8&language=<?= $langue ?>&sensor=false&callback=initialize";
+                let script = document.createElement('script');
+                script.src = "//maps.googleapis.com/maps/api/js?key=AIzaSyBKUqx5vjYkrX15OOMAxFbOkGjDfAPL1J8&language=<?= $langue ?>&callback=initialize";
                 document.body.appendChild(script);
             });
 
             function initialize() {
-                var map;
-                var bounds = new google.maps.LatLngBounds();
-                var mapOptions = {
+
+                let bounds = new google.maps.LatLngBounds();
+                let mapOptions = {
                     mapTypeId: 'roadmap'
                 };
+                let map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-                // Display a map on the page
-                map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
                 map.setTilt(45);
 
                 // Multiple Markers
 <?php makeMarker() ?>
 
                 // Display multiple markers on a map
-                var infoWindow = new google.maps.InfoWindow(), marker, i;
+                let infoWindow = new google.maps.InfoWindow();
 
                 // Parcoure le tableau des marqueurs et place chacun sur la carte  
-                for (i = 0; i < markers.length; i++) {
-                    var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+                for (let i = 0; i < markers.length; i++) {
+                    let position = new google.maps.LatLng(markers[i][1], markers[i][2]);
                     bounds.extend(position);
-                    marker = new google.maps.Marker({
+                    let marker = new google.maps.Marker({
                         position: position,
                         map: map,
                         title: markers[i][0]
                     });
 
-                    // Autorise chaque marqueur à avoir une fenêtre d'informations    
+                    // Autorise chaque marqueur � avoir une fen�tre d'informations    
                     google.maps.event.addListener(marker, 'click', (function (marker, i) {
                         return function () {
                             infoWindow.setContent(infoWindowContent[i][0]);
@@ -210,13 +223,13 @@ function afficherArbre() {
                         }
                     })(marker, i));
 
-                    // Centre automatiquement la carte en ajustant tous les marqueurs sur l'écran
+                    // Centre automatiquement la carte en ajustant tous les marqueurs sur l'�cran
                     map.fitBounds(bounds);
                 }
 
-                // Si le niveau de zoom est supérieur à 18
-                // Remplace le niveau de zoom sur la carte une fois la fonction fitBounds exécutée
-                var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function (event) {
+                // Si le niveau de zoom est sup�rieur � 18
+                // Remplace le niveau de zoom sur la carte une fois la fonction fitBounds ex�cut�e
+                let boundsListener = google.maps.event.addListener((map), 'bounds_changed', function (event) {
 
                     if (this.getZoom() > 15) {
                         this.setZoom(15);
@@ -227,8 +240,7 @@ function afficherArbre() {
 
             function afficheModal(event) {
 
-                var url = $(this).attr("href");
-                console.log(url);
+                let url = $(this).attr("href");
 
                 $.getJSON(url, function (data, status, error) {
                     console.log(data.channel);
@@ -246,7 +258,7 @@ function afficherArbre() {
                     contenu += "</div>";
 
                     $("#modal-contenu").html(contenu);
-                    var title = data.channel.id + " : " + data.channel.name;
+                    let title = data.channel.id + " : " + data.channel.name;
                     console.log(title);
                     $("#ModalLongTitle").html(title);
                     $(".btn-afficher").attr("id", data.channel.id);  // On fixe l'attribut id du button avec l'id du canal
@@ -254,15 +266,16 @@ function afficherArbre() {
                     $("#ModalCenter").modal('show');
                 });
 
-                event.preventDefault();   // bloque l'action par défaut sur le lien cliqué
+                event.preventDefault();   // bloque l'action par d�faut sur le lien cliqu�
             }
 
             function afficherVue(event) {
-                var channel_id = $(this).attr("id");
-                var channel_name = $(this).attr("name");
 
-                var choix = [];
-                var anyBoxesChecked = false;
+                let url = "./thingView?channel=" + $(this).attr("id");
+                let channel_name = $(this).attr("name");
+                let choix = [];
+                let anyBoxesChecked = false;
+
                 $('#choix  input[type="checkbox"]').each(function () {
                     if ($(this).is(":checked")) {
                         choix.push($(this).val());
@@ -273,19 +286,13 @@ function afficherArbre() {
                     console.log("pas de choix");
                 }
 
-                console.log("choix : " + choix);
-                var url = "./thingView?channel=" + channel_id;
-                for (i = 0; i < choix.length; i++) {
+                for (let i = 0; i < choix.length; i++) {
                     url += '&field' + i + '=' + choix[i];
                 }
-                console.log(url);
-                //window.location.href=url;
-                window.open(url, '_blank');
+                window.location.href = url;
                 $("#ModalCenter").modal('hide');
-
             }
         </script>
-
     </head>
 
     <body>
@@ -310,7 +317,7 @@ function afficherArbre() {
             require_once 'cookieConsent.php';
             ?>
         </div>
-        <!--Fenêtre Modal -->
+        <!--Fen�tre Modal -->
         <div class="modal" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenter" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -330,7 +337,7 @@ function afficherArbre() {
                 </div>
             </div>
         </div>
-        <!--Fin de fenêtre Modal -->
+        <!--Fin de fen�tre Modal -->
     </body>
 </html>
 

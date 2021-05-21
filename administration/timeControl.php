@@ -1,4 +1,11 @@
 <?php
+/**
+ *  @fichier  administration/support/administration/index.php							    		
+ *  @auteur   Léo Cognard (Touchard Washington le Mans)
+ *  @date     Mai 2021
+ *  @version  v1.0 - First release						
+ *  @details  Formulaire de création de tâche planifiée
+ */
 include "authentification/authcheck.php";
 
 require_once('../definition.inc.php');
@@ -13,13 +20,13 @@ use Aggregator\Support\Str;
 use Aggregator\Support\Form;
 use Aggregator\Support\CronManager;
 
-// connexion à la base
+/* connexion à la base */
 
 $bdd = Api::connexionBD(BASE, $_SESSION['time_zone']);
-// Création d'un cron_manager
+/* Création d'un cron_manager */
 $cron_manager = new CronManager();
 
-//------------si des données  sont soumises on les enregistre dans la table data.timeControls ---------
+/*------------si des données  sont soumises on les enregistre dans la table data.timeControls ---------*/
 if (!empty($_POST['envoyer'])) {
     if ($_SESSION['tokenCSRF'] === $_POST['tokenCSRF']) {
         try {
@@ -37,7 +44,7 @@ if (!empty($_POST['envoyer'])) {
                 );
                 $bdd->exec($sql);
                 $id = $bdd->lastInsertId();
-                // Création du crontab
+                /* Création du crontab */
                 $ligne = "{$_POST['minute']} {$_POST['hour']} {$_POST['dayMonth']} {$_POST['month']} {$_POST['dayWeek']} ";
                 $ligne .= "/usr/bin/php " . __DIR__ . "/../api/run.php {$_POST['actionable_id']} > /dev/null 2>&1";
 
@@ -58,7 +65,7 @@ if (!empty($_POST['envoyer'])) {
                         , $_POST['id']
                 );
                 $bdd->exec($sql);
-                // Modification du crontab
+                /* Modification du crontab */
                 $ligne = "{$_POST['minute']} {$_POST['hour']} {$_POST['dayMonth']} {$_POST['month']} {$_POST['dayWeek']} ";
                 $ligne .= "/usr/bin/php " . __DIR__ . "/../api/run.php {$_POST['actionable_id']} > /dev/null 2>&1";
                 $result = $cron_manager->remove_cronjob($_POST['id']);
@@ -69,7 +76,7 @@ if (!empty($_POST['envoyer'])) {
             return;
         }
 
-        // destruction du tokenCSRF
+        /* destruction du tokenCSRF */
         unset($_SESSION['tokenCSRF']);
 
         header("Location: timeControls.php");
@@ -77,7 +84,7 @@ if (!empty($_POST['envoyer'])) {
     }
 }
 
-// -------------- sinon lecture de la table data.timeControls  -----------------------------
+/* -------------- sinon lecture de la table data.timeControls  ----------------------------- */
 else {
     if (isset($_GET['id'])) {
         try {
@@ -91,7 +98,7 @@ else {
             return;
         }
     } else {
-        // Création d'un nouvel objet timeControl par défault
+        /* Création d'un nouvel objet timeControl par défault */
         $timeControl = new stdClass();
         $timeControl->action = 'insert';
         $timeControl->id = 0;
@@ -108,7 +115,7 @@ else {
 
 
     try {
-        // Création du $selectUser
+        /* Création du $selectUser */
         $sql = "SELECT id,login FROM users ORDER BY id;";
         $stmt = $bdd->query($sql);
 
@@ -117,7 +124,7 @@ else {
             $selectUser[$user->id] = $user->login;
         }
 
-        // Création du $select_actionable_id
+        /* Création du $select_actionable_id  */
         $select_actionable_id = array();
         if ($_SESSION['droits'] > 1)
             $sql = "SELECT id,name FROM {$timeControl->actionable_type} ORDER BY id;";
@@ -133,12 +140,19 @@ else {
         return;
     }
 }
-
+/**
+ * 
+ * @global type $lang
+ * @global type $select_actionable_id
+ * @param type $timeControl
+ * @param type $selectUser
+ * @details affiche le formulaire de tâche planifiée 
+ */
 function afficherFormTimeControl($timeControl, $selectUser) {
 
     global $lang;
     global $select_actionable_id;
-    // Création du tokenCSRF
+    /* Création du tokenCSRF */
     $tokenCSRF = STR::genererChaineAleatoire(32);
     $_SESSION['tokenCSRF'] = $tokenCSRF;
 
@@ -146,7 +160,7 @@ function afficherFormTimeControl($timeControl, $selectUser) {
     echo Form::hidden('id', $timeControl->id);
     echo Form::hidden("tokenCSRF", $_SESSION["tokenCSRF"]);
 
-    if ($_SESSION['droits'] > 1) //  un selecteur pour les administrateur
+    if ($_SESSION['droits'] > 1) /*  un selecteur pour les administrateur */
         echo Form::select("user_id", $selectUser, $lang['user'], $timeControl->user_id);
     else
         echo Form::hidden("user_id", $timeControl->user_id);

@@ -134,5 +134,49 @@ class Str {
         $dt = new \DateTime($date);
         return $dt->format('Y-m-d\TH-i-s\Z');
     }
+	
+	/**
+	 * Détection automatique de la langue du navigateur
+	 *
+	 * Les codes langues du tableau $LANGUAGES doivent obligatoirement être sur 2 caractères
+	 * Utilisation : $langue = Str::getLanguage($_SERVER['HTTP_ACCEPT_LANGUAGE'], array('fr','en') );
+	 *
+	 * @param string la variable $_SERVER['HTTP_ACCEPT_LANGUAGE']
+	 * @param array $LANGUAGES Tableau 1D des langues du site disponibles (ex: array('fr','en','es','it','de','cn')).
+	 * @return string La langue du navigateur ou bien la langue par défaut
+	 */
+	public static function getLanguage($http_accept_language, $LANGUAGES = array('en', 'fr')){
+		
+		$langValues = array();
+		foreach ($LANGUAGES as $lang) 
+		    $langValues[$lang] = -1;
+		
+		$langItems = explode(',', $http_accept_language);
+		
+		foreach($langItems as $langItem) {
+			
+            list($lang, $val) = explode(';', $langItem . ';q=1');
+			// eg en-us => en, fr-be => fr, etc.	
+            $lang = substr($lang, 0, 2);
+			
+            list($q, $value) = explode('=', $val);
+			// priority value							
+            $value = (float)$value;
+			// if $lang is one of the supported languages
+			if(in_array($lang, $LANGUAGES)) {
+				$prevValue = $langValues[$lang];
+				/* set priority to the highest value	*/
+				if($value > $prevValue) $langValues[$lang] = $value;
+			}
+        }
+		
+		arsort($langValues);
+		foreach($langValues as $lang => $value) {
+			if($value >= 0) $userLang = $lang;
+			break;
+		}
+		if(!isset($userLang)) $userLang = 'en';
+		return $userLang;
+	}	
 
 }

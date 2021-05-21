@@ -309,7 +309,7 @@ function afficherCallbacks(){
 			// Bouton add callback
 			$( "#add_callback" ).click(function() {
 				console.log("Bouton Ajouter callback_cliqué");
-				window.location = 'callback'					
+				window.location = 'callback?idDevice=<?= $idDevice ?>'					
 			});
 			
 			// Bouton modifier callback

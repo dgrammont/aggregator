@@ -1,16 +1,18 @@
 <?php
+	require_once('../definition.inc.php');
 	session_start();
 
-	// Détruit toutes les variables de session
-	$_SESSION = array();
-
-	// Si vous voulez détruire complètement la session, effacez également le cookie de session.
+	
+	// destruction complète de la session, efface également le cookie de session.
 	// Note : cela détruira la session et pas seulement les données de session !
-	if (ini_get("session.use_cookies")) {
-		$params = session_get_cookie_params();
-		setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"] );
-    }
+	
+	$params = session_get_cookie_params();
+	setcookie(session_name(), '', time() - 42000 , $params["path"], $params["domain"], $params["secure"], $params["httponly"] );
+	$retour = setcookie("auth" , '', time() - 42000 , PATH , $_SERVER["HTTP_HOST"] , false, true); 
+    
 
+	// On supprime les variables de session
+	session_unset();
 	// Finalement, on détruit la session.
 	session_destroy();
 	header("Location: ../index.php");

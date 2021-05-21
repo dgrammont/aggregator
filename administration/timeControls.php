@@ -1,4 +1,11 @@
 <?php 
+/**
+ * @fichier  timeControls.php							    		
+ * @auteur   Léo Cognard (Touchard Washington le Mans)
+ * @date     May 2021
+ * @version  v1.0 - First release						
+ * @details  Affiche la liste des tâches planifiées déjà crées.
+ */
 include "authentification/authcheck.php" ;
 
 require_once('../definition.inc.php');
@@ -37,7 +44,11 @@ if(isset($_POST['btn_supprimer'])){
 }
 
 
-
+/**
+ * @details Requête vers la BDD pour récupérer les tâches planifiées
+ * @param * (demande tous les élements du champ vue_timeControls)
+ * @return tous les élements du champ vue_timeControls et les affiche dans un tableau 
+ */
 function afficherTimeControls(){
 	
 	global $bdd;
@@ -59,16 +70,9 @@ function afficherTimeControls(){
 				echo "    <td>{$timeControl->minute} {$timeControl->hour} {$timeControl->dayMonth} {$timeControl->month} {$timeControl->dayWeek}</td>";
 				
 				$sql = "SELECT * FROM `{$timeControl->actionable_type}` where id = {$timeControl->actionable_id}";
-		
-                                $stmt2 = $bdd->query($sql);
-                                if ($stmt2->rowCount() != 0){
-                                  $action = $stmt2->fetchObject();
-                               
-				echo "    <td><a href=\"script?id={$action->id}\">{$timeControl->actionable_type} / {$action->name}</a></td>\n";  
-                                }else{
-                                    echo "    <td> </td>\n";
-                                }
-				
+				$stmt2 = $bdd->query($sql);
+				$action = $stmt2->fetchObject();
+				echo "    <td><a href=\"script?id={$action->id}\">{$timeControl->actionable_type} / {$action->name}</a></td>\n";
 				
 				echo "</tr>\n";
 			}	
@@ -119,7 +123,12 @@ function afficherTimeControls(){
         };
 			
 		$('#tableau').DataTable(options);
-		
+		/**
+                * 
+                 * @param {type} etat
+                 * @returns {undefined}  
+                 * @details permet de cocher toutes les cases affichées du tableau 
+                 *                */
 		function cocherTout(etat)
 		{
 		    var cases = document.getElementsByTagName('input');   // on recupere tous les INPUT
@@ -166,7 +175,9 @@ function afficherTimeControls(){
 				});
 			}
 		});	
-        
+                /**
+                 * @details Permet d'accéder a la page de modification de l'élement coché
+                 */
 		$( "#btn_mod" ).click(function() {
 			console.log("Bouton modifier cliqué");
 

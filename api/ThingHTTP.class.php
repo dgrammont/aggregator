@@ -4,7 +4,7 @@
   description  : deux Classes ThingHTTP & ThingHTTPException pour les objets ThingHTTP
   Ces objets permettent de faire des requetes http
   La classe thingHTTPException hérite de la classe Exception
-  author       : Philippe SIMIER Lycée Touchard Le Mans
+  author       : Lycée Touchard Le Mans
 
  * */
 
